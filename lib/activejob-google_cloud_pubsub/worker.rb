@@ -22,7 +22,7 @@ module ActiveJob
       end
 
       def run
-        pool = Concurrent::ThreadPoolExecutor.new(min_threads: @min_threads, max_threads: @max_threads, max_queue: -1)
+        pool = Concurrent::ThreadPoolExecutor.new(min_threads: @min_threads, max_threads: @max_threads, max_queue: 2)
 
         @pubsub.subscription_for(@queue_name).listen do |message|
           @logger&.info "Message(#{message.message_id}) was received."
