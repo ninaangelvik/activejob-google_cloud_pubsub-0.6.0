@@ -9,7 +9,7 @@ require 'logger'
 module ActiveJob
   module GoogleCloudPubsub
     class Worker
-      MAX_DEADLINE = 10.minutes
+      MAX_DEADLINE = 20.minutes
 
       using PubsubExtension
 
@@ -73,6 +73,7 @@ module ActiveJob
       end
 
       def _process(message)
+
         timer_opts = {
           execution_interval: MAX_DEADLINE - 10.seconds,
           timeout_interval:   1.minute,
